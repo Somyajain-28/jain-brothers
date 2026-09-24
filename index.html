@@ -119,6 +119,72 @@ a{color:inherit}
   .side a{min-height:140px}
 }
 
+/* Real photos (Unsplash) with graceful fallback */
+.photo{display:block;position:relative;overflow:hidden;background:color-mix(in srgb,var(--yellow) 22%,var(--paper))}
+.photo[data-fb]::before{content:attr(data-fb);position:absolute;inset:0;display:grid;place-items:center;font-size:52px}
+.photo.has-img::before{display:none}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s}
+.photo.has-img img{opacity:1}
+.photo svg{position:absolute;inset:0;width:100%;height:100%}
+.polaroid{justify-self:center;width:min(290px,100%);background:#fff;padding:10px 10px 34px;box-shadow:0 18px 40px rgba(28,43,74,.22);transform:rotate(3deg);position:relative}
+.polaroid .photo{aspect-ratio:4/5;width:100%}
+.polaroid::before{content:"";position:absolute;top:-13px;left:50%;width:96px;height:28px;background:rgba(242,183,5,.8);transform:translateX(-50%) rotate(-5deg);z-index:2}
+.side a.s-photo{background:#1C2B4A;color:#fff}
+.side a.s-photo .photo{position:absolute;inset:0;background:#1C2B4A}
+.side a.s-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(20,28,48,.88) 20%,rgba(20,28,48,.35) 75%)}
+.side a.s-photo > div,.side a.s-photo > .go{position:relative;z-index:1}
+
+/* Mega menu */
+.nav .caret::after{content:"";display:inline-block;width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin:0 0 3px 7px}
+.nav [aria-expanded="true"]{background:var(--yellow-soft)}
+.mega{border-top:1px solid var(--line);background:var(--surface);box-shadow:0 18px 30px rgba(28,43,74,.08)}
+.mega[hidden]{display:none}
+.mega .wrap{display:grid;grid-template-columns:220px 1fr 1fr;gap:28px;padding-top:20px;padding-bottom:22px}
+.mega h5{margin:0 0 10px;font-size:13.5px;color:var(--muted);font-weight:700}
+.mega ul{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.mega li button{border:0;background:none;padding:6px 10px;margin-left:-10px;border-radius:8px;font-weight:600;text-align:left;width:100%}
+.mega li button:hover{background:var(--yellow-soft)}
+.mega li small{color:var(--muted);font-weight:500;margin-left:6px}
+.mega .lead b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:24px;line-height:1.1;margin-bottom:6px}
+.mega .lead p{margin:0 0 12px;color:var(--muted);font-size:14.5px}
+@media (max-width:760px){.mega .wrap{grid-template-columns:1fr 1fr;gap:16px}.mega .lead{grid-column:1/-1}}
+
+/* Streams */
+.streams{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stream{border:0;border-radius:20px;padding:20px;text-align:left;color:#fff;min-height:190px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .15s}
+.stream:hover{transform:translateY(-3px)}
+.stream b{font-family:"Bricolage Grotesque",sans-serif;font-size:24px;line-height:1.05;display:block;margin-bottom:6px}
+.stream small{opacity:.9;font-size:14px;display:block;max-width:16em}
+.stream .n{font-weight:700;font-size:14px;text-decoration:underline;text-underline-offset:4px}
+.stream .glyph{position:absolute;right:-6px;top:-16px;font-family:Georgia,serif;font-size:120px;font-weight:700;opacity:.14;line-height:1}
+.stream[aria-pressed="true"]{outline:3px solid var(--yellow);outline-offset:3px}
+@media (max-width:900px){.streams{grid-template-columns:1fr 1fr}}
+
+/* Stationery tiles */
+.st-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.st-tile{border:1px solid var(--line);padding:0;border-radius:18px;overflow:hidden;background:var(--surface);text-align:left;transition:border-color .15s}
+.st-tile:hover{border-color:var(--ink)}
+.st-tile .photo{aspect-ratio:4/3}
+.st-tile .lbl{display:block;padding:12px 14px 14px}
+.st-tile b{display:block;font-size:17px}
+.st-tile small{color:var(--muted);font-size:14px;line-height:1.35;display:block}
+@media (max-width:900px){.st-grid{grid-template-columns:1fr 1fr}}
+
+/* Help cards */
+.help2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.booklist{display:grid;grid-template-columns:1fr 200px;gap:18px;align-items:center;background:var(--yellow-soft);border-radius:22px;padding:26px 28px;border:1px solid color-mix(in srgb,var(--yellow) 40%,var(--line))}
+.booklist h3{margin:0 0 6px;font-size:26px;line-height:1.1}
+.booklist p{margin:0 0 14px;color:var(--muted)}
+.booklist ol{margin:0 0 16px;padding-left:20px;display:grid;gap:4px;font-weight:600;font-size:15px}
+.booklist .photo{aspect-ratio:1;border-radius:16px;transform:rotate(-3deg);box-shadow:var(--shadow)}
+.help2 .bulk{flex-direction:column;align-items:flex-start;justify-content:space-between}
+@media (max-width:900px){.help2{grid-template-columns:1fr}.booklist{grid-template-columns:1fr}.booklist .photo{display:none}}
+.about-photo{border-radius:20px;aspect-ratio:5/4;box-shadow:var(--shadow)}
+.about{grid-template-columns:auto 1fr 300px}
+@media (max-width:1000px){.about{grid-template-columns:auto 1fr}.about-photo{display:none}}
+.addr{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-top:14px;max-width:560px}
+.addr a{font-weight:700;color:var(--green);white-space:nowrap}
+
 /* Promise strip */
 .promise{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border:1px solid var(--line);border-radius:18px;margin-top:16px}
 .promise div{display:flex;gap:12px;align-items:center;padding:16px 18px;border-left:1px dashed var(--line)}
@@ -410,15 +476,16 @@ dialog.drawer[open]{display:flex}
   </div>
   <nav class="wrap nav" aria-label="Main">
     <a href="#classes">Shop by class</a>
-    <button data-board="NCERT">NCERT</button>
-    <button data-board="CBSE">CBSE reference</button>
-    <button data-board="ICSE">ICSE</button>
-    <button data-board="Stationery">Stationery</button>
+    <button class="caret" data-menu="NCERT" aria-expanded="false">NCERT</button>
+    <button class="caret" data-menu="CBSE" aria-expanded="false">CBSE reference</button>
+    <button class="caret" data-menu="ICSE" aria-expanded="false">ICSE</button>
+    <button class="caret" data-menu="Stationery" aria-expanded="false">Stationery</button>
+    <a href="#streams">Class 11–12 streams</a>
     <a href="#exchange" class="hot">Book exchange</a>
-    <a href="#bulk">Schools &amp; bulk orders</a>
     <a href="#about">About us</a>
     <button data-action="orders">My orders</button>
   </nav>
+  <div class="mega" id="mega" hidden><div class="wrap" id="megaInner"></div></div>
 </header>
 
 <main>
@@ -433,13 +500,13 @@ dialog.drawer[open]{display:flex}
                 <p>NCERT, CBSE and ICSE books for classes 6 to 12 from Gwalior's school book wholesaler, delivered anywhere in India.</p>
                 <div class="ctas"><a class="btn" href="#classes">Shop by class</a><a class="btn line" href="#exchange">Exchange old books</a></div>
               </div>
-              <svg viewBox="0 0 260 230" aria-hidden="true">
+              <div class="polaroid" aria-hidden="true"><div class="photo">              <svg viewBox="0 0 260 230" aria-hidden="true" preserveAspectRatio="xMidYMid meet">
                 <rect x="40" y="170" width="190" height="34" rx="4" fill="#2F5BD3"/><rect x="40" y="170" width="10" height="34" fill="#1C2B4A" opacity=".25"/><text x="62" y="192" font-family="Figtree,sans-serif" font-weight="700" font-size="13" fill="#fff">MATHEMATICS</text>
                 <rect x="54" y="134" width="170" height="36" rx="4" fill="#0E9F6E"/><rect x="54" y="134" width="10" height="36" fill="#1C2B4A" opacity=".25"/><text x="76" y="157" font-family="Figtree,sans-serif" font-weight="700" font-size="13" fill="#fff">SCIENCE</text>
                 <rect x="30" y="100" width="180" height="34" rx="4" fill="#C2255C"/><rect x="30" y="100" width="10" height="34" fill="#1C2B4A" opacity=".25"/><text x="52" y="122" font-family="Figtree,sans-serif" font-weight="700" font-size="13" fill="#fff">ENGLISH</text>
                 <rect x="60" y="68" width="150" height="32" rx="4" fill="#F2B705"/><rect x="60" y="68" width="10" height="32" fill="#1C2B4A" opacity=".25"/><text x="82" y="89" font-family="Figtree,sans-serif" font-weight="700" font-size="13" fill="#1C2B4A">SOCIAL SCIENCE</text>
                 <g transform="rotate(-18 190 50)"><rect x="120" y="42" width="130" height="14" rx="3" fill="#F2B705"/><path d="M250 42l20 7-20 7z" fill="#F4D9A8"/><path d="M262 46l8 3-8 3z" fill="#1C2B4A"/><rect x="112" y="42" width="10" height="14" rx="2" fill="#D94A3D"/></g>
-              </svg>
+              </svg><img data-ph="1" data-keep="1" data-photo="BOOKS" alt="" loading="eager"></div></div>
             </div>
             <div class="slide yellow">
               <div>
@@ -473,10 +540,11 @@ dialog.drawer[open]{display:flex}
           <div class="cnav"><span class="dots" id="dots"></span><button data-slide="-1" aria-label="Previous">‹</button><button data-slide="1" aria-label="Next">›</button></div>
         </div>
         <div class="side">
-          <a class="s-red" href="#shop" data-board="Stationery">
+          <a class="s-red s-photo" href="#stationery">
+            <span class="photo" aria-hidden="true" data-fb="🖊️"><img data-ph="1" data-keep="1" data-photo="PENS" alt="" loading="eager"></span>
             <div><h3>Stationery at wholesale prices</h3><p>Notebooks, pens, geometry boxes and calculators.</p></div>
             <span class="go">Shop stationery</span>
-            <svg viewBox="0 0 120 110" aria-hidden="true"><rect x="30" y="20" width="60" height="80" rx="6" fill="#fff"/><path d="M42 20v80" stroke="#D94A3D" stroke-width="2"/><path d="M48 38h32M48 50h32M48 62h32M48 74h24" stroke="#C9D7EE" stroke-width="3"/><g transform="rotate(35 95 50)"><rect x="88" y="10" width="12" height="70" rx="2" fill="#F2B705"/><path d="M88 80l6 14 6-14z" fill="#F4D9A8"/></g></svg>
+
           </a>
           <a class="s-green" href="#bulk">
             <div><h3>Schools and bookshops</h3><p>Wholesale rates on bulk and school-list orders.</p></div>
@@ -502,10 +570,29 @@ dialog.drawer[open]{display:flex}
     </div>
   </section>
 
+  <section class="block" id="streams">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Class 11 and 12, by stream</h2><p>Every NCERT and reference book for your stream, in one place.</p></div></div>
+      <div class="streams" id="streamGrid"></div>
+    </div>
+  </section>
+
   <section class="block">
     <div class="wrap">
       <div class="sec-head"><div><h2>Most ordered this season</h2><p>What Gwalior's students are buying right now.</p></div><button class="more" data-action="shop-all">View all</button></div>
       <div class="row" id="bestRow"></div>
+    </div>
+  </section>
+
+  <section class="block" id="stationery">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Stationery for the whole year</h2><p>Notebooks, pens, colours and calculators at wholesale prices.</p></div><button class="more" data-board="Stationery">See all stationery</button></div>
+      <div class="st-grid">
+        <button class="st-tile" data-board="Stationery" data-group="notebooks"><span class="photo" data-fb="📓"><img data-ph="1" data-keep="1" data-photo="NOTEBOOKS" alt="Stack of notebooks" loading="lazy"></span><span class="lbl"><b>Notebooks</b><small>Single line, long and practical notebooks</small></span></button>
+        <button class="st-tile" data-board="Stationery" data-group="pens"><span class="photo" data-fb="🖊️"><img data-ph="1" data-keep="1" data-photo="PENS" alt="Pens and pencils" loading="lazy"></span><span class="lbl"><b>Pens &amp; pencils</b><small>Ball pens, dark pencils and HB pencils</small></span></button>
+        <button class="st-tile" data-board="Stationery" data-group="art"><span class="photo" data-fb="🖍️"><img data-ph="1" data-keep="1" data-photo="CRAYONS" alt="Box of crayons" loading="lazy"></span><span class="lbl"><b>Colours &amp; art</b><small>Crayons and sketch pens for art class</small></span></button>
+        <button class="st-tile" data-board="Stationery" data-group="calc"><span class="photo" data-fb="🧮"><img data-ph="1" data-keep="1" data-photo="CALC" alt="Calculator on a study desk" loading="lazy"></span><span class="lbl"><b>Calculators &amp; geometry</b><small>Scientific calculators, geometry boxes, exam pads</small></span></button>
+      </div>
     </div>
   </section>
 
@@ -568,17 +655,32 @@ dialog.drawer[open]{display:flex}
         <div>
           <h2>Gwalior's school book wholesaler, now online</h2>
           <p>Since 1987, Jain Brothers has supplied textbooks, reference books and stationery to schools, bookshops and families across Gwalior. Now the same stock, at the same wholesale-backed prices, is a few taps away for students anywhere in India.</p>
-          <p>We only deal in educational books: textbooks, reference books, question banks and stationery. No novels or fiction.</p>
-          <div class="tags"><span>NCERT</span><span>CBSE</span><span>ICSE</span><span>Classes 6 to 12</span><span>Stationery</span></div>
+          <p>From NCERT textbooks and question banks to geometry boxes and scientific calculators, we stock what's on your school's booklist, and we'll arrange anything that isn't listed here.</p>
+          <div class="tags"><span>NCERT</span><span>CBSE</span><span>ICSE</span><span>Classes 6 to 12</span><span>Science, Commerce, Humanities</span><span>Stationery</span></div>
+          <div class="addr"><span aria-hidden="true">📍</span><span><b>Visit our counter</b><br><span class="hi" id="aboutAddr"></span></span><a id="aboutMap" target="_blank" rel="noopener">Get directions</a></div>
         </div>
+        <span class="photo about-photo" aria-hidden="true" data-fb="📚"><img data-ph="1" data-keep="1" data-photo="BOOKS" alt="" loading="lazy"></span>
       </div>
     </div>
   </section>
 
   <section class="block" id="bulk">
-    <div class="wrap">
+    <div class="wrap help2">
+      <div class="booklist">
+        <div>
+          <h3>Got your school's booklist?</h3>
+          <p>Skip searching title by title. Send us a photo of the list and we'll pack the complete set.</p>
+          <ol>
+            <li>Photograph the booklist your school gave you.</li>
+            <li>Send it to us on WhatsApp with your name and address.</li>
+            <li>We reply with the total and pack the set.</li>
+          </ol>
+          <a class="btn wa" id="booklistBtn" target="_blank" rel="noopener">Send booklist on WhatsApp</a>
+        </div>
+        <span class="photo" aria-hidden="true" data-fb="✏️"><img data-ph="1" data-keep="1" data-photo="PENCILS" alt="" loading="lazy"></span>
+      </div>
       <div class="bulk">
-        <div><h3>Ordering for a school or bookshop?</h3><p>Send your book list and quantities. We'll reply with wholesale rates.</p></div>
+        <div><h3>Ordering for a school or bookshop?</h3><p>Send your book list and quantities. We'll reply with wholesale rates, usually the same day.</p></div>
         <button class="btn y" data-action="bulk">Send a bulk enquiry</button>
       </div>
     </div>
@@ -605,7 +707,7 @@ dialog.drawer[open]{display:flex}
     <div class="fgrid">
       <div>
         <a class="brand" href="#top" style="margin-bottom:12px"><span class="brand-mark" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v15H5.5C4.7 19 4 18.3 4 17.5z" fill="#1C2B4A"/><path d="M13 4h5.5c.8 0 1.5.7 1.5 1.5v12c0 .8-.7 1.5-1.5 1.5H13z" fill="#1C2B4A" opacity=".6"/></svg></span><span><b>Jain Brothers</b><small>Gwalior, since 1987</small></span></a>
-        <p>School textbooks, reference books and stationery at wholesale-backed prices. Educational books only.</p>
+        <p>School textbooks, reference books and stationery at wholesale-backed prices, from Phalka Bazar, Gwalior.</p>
       </div>
       <div>
         <h4>Shop</h4>
@@ -636,11 +738,11 @@ dialog.drawer[open]{display:flex}
           <li>📞 <a href="tel:+919713374458">+91 97133 74458</a></li>
           <li>💬 <a id="fWa" target="_blank" rel="noopener">WhatsApp us</a></li>
           <li>✉️ <a href="mailto:jainbrother179@gmail.com">jainbrother179@gmail.com</a></li>
-          <li>📍 <span id="fAddr"></span></li>
+          <li style="align-items:flex-start">📍 <span><span id="fAddr"></span><br><a id="fMap" target="_blank" rel="noopener" style="font-weight:700">Get directions</a></span></li>
         </ul>
       </div>
     </div>
-    <div class="copy"><span>© <span id="yr"></span> Jain Brothers, Gwalior</span><span>Prices are indicative and confirmed on WhatsApp before dispatch.</span></div>
+    <div class="copy"><span>© <span id="yr"></span> Jain Brothers, Gwalior</span><span>Prices are indicative and confirmed on WhatsApp before dispatch. Photos: Unsplash.</span></div>
   </div>
 </footer>
 
@@ -682,13 +784,18 @@ const BIZ = {
   phone: "9713374458",
   whatsapp: "919713374458",
   email: "jainbrother179@gmail.com",
-  address: "Gwalior, Madhya Pradesh",
+  address: "B/6, Gorai Complex, Ram Mandir Crossing, Kailash Talkies Road, Phalka Bazar, Gwalior, Madhya Pradesh 474001",
+  mapQuery: "Jain Brothers, Gorai Complex, Ram Mandir Crossing, Phalka Bazar, Gwalior 474001",
   freeShippingAbove: 999,      // orders at or above this get free delivery outside Gwalior
   shippingCharge: 60,          // flat delivery charge outside Gwalior below that amount
   exchangeGood: 40,            // % of MRP credited for books in good condition
   exchangeFair: 25             // % of MRP credited for books in fair condition
 };
 const GWALIOR_PIN = /^474\d{3}$/;
+// Free photos from Unsplash (Unsplash License: free for commercial use, no permission needed)
+const PHOTO = id => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&q=70`;
+const PHOTOS = { BOOKS:"photo-1660606422342-2ce59709bb14", PENS:"photo-1498729277079-9aa24f85d92d", CRAYONS:"photo-1453749024858-4bca89bd9edc",
+  PENCILS:"photo-1513542789411-b6a5d4f31634", NOTEBOOKS:"photo-1733878859915-dc074dd9ee27", CALC:"photo-1761546571631-a4d61b55cd2f" };
 const STATES = ["Andaman and Nicobar Islands","Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chandigarh","Chhattisgarh","Dadra and Nagar Haveli and Daman and Diu","Delhi","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Ladakh","Lakshadweep","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Puducherry","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal"];
 
 /* ================= Catalogue (sample prices — update from stock) =================
@@ -699,12 +806,17 @@ const RAW = [
 ["Ganita Prakash","NCERT","NCERT",8,"Mathematics",65,5],["Curiosity","NCERT","NCERT",8,"Science",65,5],["Exploring Society: India and Beyond","NCERT","NCERT",8,"Social Science",65,5],["Poorvi","NCERT","NCERT",8,"English",65,5],
 ["Mathematics","NCERT","NCERT",9,"Mathematics",65,5],["Science","NCERT","NCERT",9,"Science",65,5],["Beehive","NCERT","NCERT",9,"English",65,5],["Moments","NCERT","NCERT",9,"English",50,5],["India and the Contemporary World – I","NCERT","NCERT",9,"Social Science",65,5],["Contemporary India – I","NCERT","NCERT",9,"Social Science",65,5],["Democratic Politics","NCERT","NCERT",9,"Social Science",65,5],["Economics","NCERT","NCERT",9,"Social Science",50,5],["Kshitij – 1","NCERT","NCERT",9,"Hindi",65,5],
 ["Mathematics","NCERT","NCERT",10,"Mathematics",65,5],["Science","NCERT","NCERT",10,"Science",65,5],["First Flight","NCERT","NCERT",10,"English",65,5],["Footprints Without Feet","NCERT","NCERT",10,"English",50,5],["India and the Contemporary World – II","NCERT","NCERT",10,"Social Science",65,5],["Contemporary India – II","NCERT","NCERT",10,"Social Science",65,5],["Democratic Politics – II","NCERT","NCERT",10,"Social Science",65,5],["Understanding Economic Development","NCERT","NCERT",10,"Social Science",50,5],["Kshitij – 2","NCERT","NCERT",10,"Hindi",65,5],["Exemplar Problems: Mathematics","NCERT","NCERT",10,"Mathematics",110,5],
-["Physics Part I","NCERT","NCERT",11,"Physics",125,5],["Physics Part II","NCERT","NCERT",11,"Physics",110,5],["Chemistry Part I","NCERT","NCERT",11,"Chemistry",125,5],["Chemistry Part II","NCERT","NCERT",11,"Chemistry",110,5],["Mathematics","NCERT","NCERT",11,"Mathematics",175,5],["Biology","NCERT","NCERT",11,"Biology",175,5],["Hornbill","NCERT","NCERT",11,"English",65,5],["Snapshots","NCERT","NCERT",11,"English",50,5],["Indian Economic Development","NCERT","NCERT",11,"Economics",65,5],["Business Studies","NCERT","NCERT",11,"Business Studies",110,5],
+["Physics Part I","NCERT","NCERT",11,"Physics",125,5],["Physics Part II","NCERT","NCERT",11,"Physics",110,5],["Chemistry Part I","NCERT","NCERT",11,"Chemistry",125,5],["Chemistry Part II","NCERT","NCERT",11,"Chemistry",110,5],["Mathematics","NCERT","NCERT",11,"Mathematics",175,5],["Biology","NCERT","NCERT",11,"Biology",175,5],["Hornbill","NCERT","NCERT",11,"English",65,5],["Snapshots","NCERT","NCERT",11,"English",50,5],["Indian Economic Development","NCERT","NCERT",11,"Economics",65,5],["Statistics for Economics","NCERT","NCERT",11,"Economics",65,5],["Business Studies","NCERT","NCERT",11,"Business Studies",110,5],["Financial Accounting Part I","NCERT","NCERT",11,"Accountancy",110,5],
+["Themes in World History","NCERT","NCERT",11,"History",110,5],["Fundamentals of Physical Geography","NCERT","NCERT",11,"Geography",65,5],["India: Physical Environment","NCERT","NCERT",11,"Geography",65,5],["Indian Constitution at Work","NCERT","NCERT",11,"Political Science",65,5],["Political Theory","NCERT","NCERT",11,"Political Science",65,5],
 ["Physics Part I","NCERT","NCERT",12,"Physics",125,5],["Physics Part II","NCERT","NCERT",12,"Physics",110,5],["Chemistry Part I","NCERT","NCERT",12,"Chemistry",125,5],["Chemistry Part II","NCERT","NCERT",12,"Chemistry",110,5],["Mathematics Part I","NCERT","NCERT",12,"Mathematics",125,5],["Mathematics Part II","NCERT","NCERT",12,"Mathematics",110,5],["Biology","NCERT","NCERT",12,"Biology",175,5],["Flamingo","NCERT","NCERT",12,"English",65,5],["Vistas","NCERT","NCERT",12,"English",50,5],["Introductory Macroeconomics","NCERT","NCERT",12,"Economics",65,5],["Introductory Microeconomics","NCERT","NCERT",12,"Economics",65,5],
+["Accountancy Part I","NCERT","NCERT",12,"Accountancy",125,5],["Accountancy Part II","NCERT","NCERT",12,"Accountancy",125,5],["Business Studies Part I","NCERT","NCERT",12,"Business Studies",110,5],["Business Studies Part II","NCERT","NCERT",12,"Business Studies",110,5],
+["Themes in Indian History Part I","NCERT","NCERT",12,"History",65,5],["Themes in Indian History Part II","NCERT","NCERT",12,"History",65,5],["Themes in Indian History Part III","NCERT","NCERT",12,"History",65,5],
+["Fundamentals of Human Geography","NCERT","NCERT",12,"Geography",65,5],["India: People and Economy","NCERT","NCERT",12,"Geography",65,5],["Contemporary World Politics","NCERT","NCERT",12,"Political Science",65,5],["Politics in India since Independence","NCERT","NCERT",12,"Political Science",65,5],
 ["Mathematics for Class 9","Dhanpat Rai Publications (R.D. Sharma)","CBSE",9,"Mathematics",650,20],["Mathematics for Class 10","Dhanpat Rai Publications (R.D. Sharma)","CBSE",10,"Mathematics",690,20],["Secondary School Mathematics for Class 10","Bharati Bhawan (R.S. Aggarwal)","CBSE",10,"Mathematics",560,18],
 ["Science for Tenth Class: Physics","S. Chand (Lakhmir Singh & Manjit Kaur)","CBSE",10,"Science",345,20],["Science for Tenth Class: Chemistry","S. Chand (Lakhmir Singh & Manjit Kaur)","CBSE",10,"Science",345,20],["Science for Tenth Class: Biology","S. Chand (Lakhmir Singh & Manjit Kaur)","CBSE",10,"Science",345,20],
 ["All in One Science","Arihant","CBSE",10,"Science",595,25],["Question Bank: Mathematics Standard","Oswaal Books","CBSE",10,"Mathematics",599,28],["Question Bank: Science","Oswaal Books","CBSE",10,"Science",599,28],["Xam Idea Complete Course: Mathematics","VK Global Publications","CBSE",10,"Mathematics",575,25],
 ["Concepts of Physics Vol. 1","Bharati Bhawan (H.C. Verma)","CBSE",11,"Physics",525,15],["Concepts of Physics Vol. 2","Bharati Bhawan (H.C. Verma)","CBSE",12,"Physics",525,15],["Mathematics for Class 11","Dhanpat Rai Publications (R.D. Sharma)","CBSE",11,"Mathematics",895,20],["Mathematics for Class 12 (Vol. 1 & 2)","Dhanpat Rai Publications (R.D. Sharma)","CBSE",12,"Mathematics",1295,20],["Objective NCERT at your Fingertips: Physics","MTG Learning Media","CBSE",12,"Physics",925,30],["Question Bank: Physics","Oswaal Books","CBSE",12,"Physics",649,28],
+["Accountancy for Class 11","Arya Publications (D.K. Goel)","CBSE",11,"Accountancy",695,15],["Double Entry Book Keeping: Accountancy Class 12","Sultan Chand (T.S. Grewal)","CBSE",12,"Accountancy",995,15],["Economics for Class 12","Dhanpat Rai Publications (Sandeep Garg)","CBSE",12,"Economics",595,15],
 ["Concise Mathematics Middle School","Selina Publishers","ICSE",8,"Mathematics",540,15],["Concise Mathematics","Selina Publishers","ICSE",9,"Mathematics",650,15],["Concise Physics","Selina Publishers","ICSE",9,"Physics",510,15],["Concise Chemistry","Selina Publishers","ICSE",9,"Chemistry",510,15],
 ["Concise Mathematics","Selina Publishers","ICSE",10,"Mathematics",690,15],["Concise Physics","Selina Publishers","ICSE",10,"Physics",540,15],["Concise Chemistry","Selina Publishers","ICSE",10,"Chemistry",540,15],["Concise Biology","Selina Publishers","ICSE",10,"Biology",540,15],
 ["Understanding ICSE Mathematics","Avichal Publishing (M.L. Aggarwal)","ICSE",10,"Mathematics",695,18],["Total English","Morning Star","ICSE",9,"English",420,15],["Total English","Morning Star","ICSE",10,"English",420,15],
@@ -721,12 +833,23 @@ const BOOKS = RAW.map(([title,pub,board,cls,subj,mrp,off])=>{
   return { id, title, pub, board, cls, subj, mrp, off, price: Math.round(mrp*(100-off)/100) };
 });
 const byId = Object.fromEntries(BOOKS.map(b=>[b.id,b]));
+const GROUPS = {
+  pcm:{label:"Science (PCM)", subj:["Physics","Chemistry","Mathematics","English"], min:11, blurb:"Physics, Chemistry, Mathematics", color:"#2F5BD3", glyph:"π"},
+  pcb:{label:"Science (PCB)", subj:["Physics","Chemistry","Biology","English"], min:11, blurb:"Physics, Chemistry, Biology", color:"#2B9348", glyph:"✿"},
+  commerce:{label:"Commerce", subj:["Accountancy","Business Studies","Economics","Mathematics","English"], min:11, blurb:"Accountancy, Business Studies, Economics", color:"#5F3DC4", glyph:"%"},
+  humanities:{label:"Humanities", subj:["History","Geography","Political Science","Economics","English"], min:11, blurb:"History, Geography, Political Science", color:"#9C6B30", glyph:"✦"},
+  notebooks:{label:"Notebooks", subj:["Notebooks"], board:"Stationery"},
+  pens:{label:"Pens & pencils", subj:["Pens & pencils"], board:"Stationery"},
+  art:{label:"Colours & art", subj:["Art"], board:"Stationery"},
+  calc:{label:"Calculators & geometry", subj:["Calculators","Geometry","Exam supplies"], board:"Stationery"}
+};
+const inGroup = (b,g) => (!g.min || b.cls>=g.min) && g.subj.includes(b.subj) && (!g.board || b.board===g.board);
 const BOARD_LABEL = { NCERT:"NCERT", CBSE:"CBSE reference", ICSE:"ICSE", Stationery:"Stationery" };
 
 /* ================= Cover artwork ================= */
 const SUBJ = {
   "Mathematics":["#2F5BD3","π"],"Science":["#0E9F6E","⚛"],"Physics":["#5B45C8","Φ"],"Chemistry":["#D9480F","◇"],"Biology":["#2B9348","✿"],
-  "English":["#C2255C","Aa"],"Hindi":["#E8590C","अ"],"Social Science":["#B7791F","◎"],"Economics":["#1C7ED6","₹"],"Business Studies":["#0B7285","↗"],
+  "English":["#C2255C","Aa"],"Accountancy":["#5F3DC4","%"],"History":["#9C6B30","✦"],"Geography":["#1E7F8C","◎"],"Political Science":["#7A3E9D","§"],"Hindi":["#E8590C","अ"],"Social Science":["#B7791F","◎"],"Economics":["#1C7ED6","₹"],"Business Studies":["#0B7285","↗"],
   "Notebooks":["#1C2B4A","≡"],"Geometry":["#5F3DC4","△"],"Pens & pencils":["#D94A3D","✎"],"Art":["#E64980","✺"],"Calculators":["#343A40","±"],"Exam supplies":["#2F8F5B","✓"]
 };
 function wrapTitle(t, max){
@@ -763,7 +886,8 @@ function coverSVG(b){
 function coverHTML(b, extra=""){
   return `<div class="cover" ${extra}>${coverSVG(b)}<img data-ph="1" src="images/${b.id}.jpg" alt="${esc(b.title)} cover" loading="lazy">${b.off>=10?`<span class="off">${b.off}% off</span>`:""}</div>`;
 }
-document.addEventListener("error", e=>{ const t=e.target; if(t && t.dataset && t.dataset.ph) t.remove(); }, true);
+document.addEventListener("error", e=>{ const t=e.target; if(t && t.dataset && t.dataset.ph){ if(t.dataset.keep) t.style.display="none"; else t.remove(); } }, true);
+function fillPhotos(){ document.querySelectorAll("img[data-photo]").forEach(img=>{ const k=img.dataset.photo; if(PHOTOS[k]) img.src=PHOTO(PHOTOS[k]); }); }
 document.addEventListener("load", e=>{ const t=e.target; if(t && t.dataset && t.dataset.ph && t.parentElement) t.parentElement.classList.add("has-img"); }, true);
 
 /* ================= FAQ + chatbot knowledge ================= */
@@ -772,20 +896,21 @@ const FAQS = [
   {q:"How long does delivery take?", a:"Gwalior orders usually reach you in 1 to 2 days. Other cities usually take 4 to 7 working days after we confirm your order on WhatsApp.", k:["how long","days","time","when","reach","arrive","fast"]},
   {q:"How do I pay?", a:"After you place an order, we confirm it on WhatsApp and share UPI payment details. Cash on delivery is available in Gwalior (pincodes starting 474).", k:["pay","payment","upi","cash","cod","online","gpay","paytm","phonepe"]},
   {q:"How does the old book exchange work?", a:`List your old books in the Book exchange section to see your estimated credit, then send the list to us on WhatsApp. Books in good condition get ${BIZ.exchangeGood}% of MRP and fair condition ${BIZ.exchangeFair}%. The credit is added to your next order after we check the books.`, k:["exchange","old","used","second","credit","sell","return old"]},
-  {q:"Which books can I exchange?", a:"School textbooks and reference books of the current syllabus, with all pages present and no heavy writing or water damage. Novels, guides with filled answers and outdated editions can't be exchanged.", k:["which books","accept","condition","eligible","torn","written"]},
-  {q:"Do you sell novels or story books?", a:"No. We deal only in educational books (textbooks, reference books, question banks) and stationery.", k:["novel","story","fiction","comic","harry potter","storybook"]},
+  {q:"Which books can I exchange?", a:"School textbooks and reference books of the current syllabus, with all pages present and no heavy writing or water damage. Filled-in workbooks and outdated editions can't be exchanged.", k:["which books","accept","condition","eligible","torn","written"]},
   {q:"Which boards and classes do you cover?", a:"NCERT books used in CBSE schools, CBSE reference books and ICSE books for classes 6 to 12, plus stationery. If you can't find a book, message us and we'll arrange it.", k:["board","class","cbse","icse","ncert","state","available","find","stock"]},
+  {q:"Do you have books for Science, Commerce and Humanities?", a:"Yes. For Class 11 and 12 we stock NCERT and reference books for Science (PCM and PCB), Commerce (Accountancy, Business Studies, Economics) and Humanities (History, Geography, Political Science). Open Class 11–12 streams on the home page.", k:["commerce","humanities","arts","science","pcm","pcb","stream","accountancy","history","geography","political"]},
+  {q:"Can I send my school booklist?", a:"Yes. Send a photo of your school's booklist to us on WhatsApp with your name and address, and we'll reply with the total and pack the complete set.", k:["booklist","book list","list","school list","full set","complete set"]},
   {q:"Can I return or replace a book?", a:"If a book arrives damaged, misprinted or wrong, tell us within 7 days and we'll replace it free. Books in new condition can be returned within 7 days if unused.", k:["return","replace","replacement","damaged","wrong","refund","misprint"]},
   {q:"Do you take bulk or school orders?", a:"Yes. Schools, coaching centres and bookshops get wholesale rates. Use Send a bulk enquiry on the home page with your book list.", k:["bulk","school","wholesale","shop","coaching","quantity","dealer"]},
   {q:"How do I track my order?", a:"Open My orders to see what you've placed. For live status, message us on WhatsApp with your order number and we'll reply with the courier details.", k:["track","status","where is","order"]},
-  {q:"Where is your shop?", a:`We're in ${BIZ.address}. Call or WhatsApp +91 ${BIZ.phone} for directions and timings.`, k:["where","address","shop","store","location","visit","timing","open"]}
+  {q:"Where is your shop?", a:`Our counter is at ${BIZ.address}, near Ram Mandir Crossing on Kailash Talkies Road. Call or WhatsApp +91 ${BIZ.phone} before visiting.`, k:["where","address","shop","store","location","visit","timing","open","phalka","directions"]}
 ];
 
 const LEGAL = {
   shipping:["Shipping policy",`<p>We deliver across India. Delivery in Gwalior is free. Outside Gwalior, delivery is free on orders of ₹${BIZ.freeShippingAbove} or more; below that a flat ₹${BIZ.shippingCharge} is charged.</p><p>Gwalior orders usually arrive in 1–2 days. Other cities usually take 4–7 working days after the order is confirmed on WhatsApp.</p>`],
   returns:["Returns & replacement",`<p>If a book arrives damaged, misprinted or wrong, tell us on WhatsApp within 7 days of delivery with a photo and we'll replace it at no cost.</p><p>Unused books in new condition can be returned within 7 days. Refunds are made by UPI within 5 working days of receiving the book.</p>`],
   exchange:["Exchange policy",`<p>We accept school textbooks and reference books of the current syllabus in exchange. Credit is ${BIZ.exchangeGood}% of MRP for good condition (clean, all pages, light marks) and ${BIZ.exchangeFair}% for fair condition (some writing, worn cover).</p><p>Books with missing pages, water damage, filled-in workbooks or outdated editions can't be accepted. Final credit is set after we check the books and is used against your next order. It can't be paid out in cash.</p>`],
-  terms:["Terms & conditions",`<p>Orders placed on this website are confirmed by Jain Brothers on WhatsApp or by phone before dispatch. Prices shown are indicative and may change with publisher revisions; the final price is confirmed before you pay.</p><p>We sell educational books and stationery only.</p>`],
+  terms:["Terms & conditions",`<p>Orders placed on this website are confirmed by Jain Brothers on WhatsApp or by phone before dispatch. Prices shown are indicative and may change with publisher revisions; the final price is confirmed before you pay.</p><p>We sell school textbooks, reference books, question banks and stationery.</p>`],
   privacy:["Privacy policy",`<p>We collect your name, mobile number, email and address only to process orders, exchanges and enquiries, and to contact you about them. We don't sell or share your details, except with the courier delivering your order.</p><p>To see or delete your details, contact ${BIZ.email}.</p>`]
 };
 
@@ -793,7 +918,7 @@ const LEGAL = {
 const S = { get(k,d){ try{ const v=localStorage.getItem("jb_"+k); return v?JSON.parse(v):d; }catch(e){ return d; } },
             set(k,v){ try{ localStorage.setItem("jb_"+k,JSON.stringify(v)); return true; }catch(e){ return false; } } };
 let users=S.get("users",{}), session=S.get("session",null), cart=S.get("cart",{}), orders=S.get("orders",[]);
-const filt={ board:"", cls:"", subj:"", sort:"rel", q:"" }; let showAll=false;
+const filt={ board:"", cls:"", subj:"", group:"", sort:"rel", q:"" }; let showAll=false;
 
 const $ = s=>document.querySelector(s);
 const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -854,7 +979,9 @@ function list(){
   let L=BOOKS.filter(b=>{
     if(filt.board && b.board!==filt.board) return false;
     if(filt.cls && String(b.cls)!==String(filt.cls)) return false;
+    if(filt.junior && b.cls>10) return false;
     if(filt.subj && b.subj!==filt.subj) return false;
+    if(filt.group && !inGroup(b,GROUPS[filt.group])) return false;
     if(q){ const hay=`${b.title} ${b.pub} ${b.board} ${BOARD_LABEL[b.board]} ${b.subj} class ${b.cls} ${b.cls}th`.toLowerCase(); if(!q.split(/\s+/).every(w=>hay.includes(w))) return false; }
     return true; });
   const S2={ rel:(a,b)=>(a.cls||99)-(b.cls||99)||a.subj.localeCompare(b.subj)||a.board.localeCompare(b.board), low:(a,b)=>a.price-b.price, high:(a,b)=>b.price-a.price, off:(a,b)=>b.off-a.off };
@@ -863,25 +990,53 @@ function list(){
 function renderFilters(){
   const clsOpts=[["","All classes"],...[6,7,8,9,10,11,12].map(c=>[c,"Class "+c])];
   $("#fClass").innerHTML=clsOpts.map(([v,l])=>`<option value="${v}" ${String(filt.cls)===String(v)?"selected":""}>${l}</option>`).join("");
-  const subjects=[...new Set(BOOKS.filter(b=>(!filt.board||b.board===filt.board)&&(!filt.cls||String(b.cls)===String(filt.cls))).map(b=>b.subj))].sort();
+  const subjects=[...new Set(BOOKS.filter(b=>(!filt.board||b.board===filt.board)&&(!filt.cls||String(b.cls)===String(filt.cls))&&(!filt.group||inGroup(b,GROUPS[filt.group]))).map(b=>b.subj))].sort();
   if(filt.subj && !subjects.includes(filt.subj)) filt.subj="";
   $("#fSubject").innerHTML=`<option value="">All subjects</option>`+subjects.map(s=>`<option ${s===filt.subj?"selected":""}>${esc(s)}</option>`).join("");
   document.querySelectorAll("[data-fboard]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.fboard===filt.board));
 }
 function renderGrid(){
   renderFilters();
-  const L=list(), narrowed=filt.board||filt.cls||filt.subj||filt.q;
+  const L=list(), narrowed=filt.board||filt.cls||filt.subj||filt.q||filt.group;
   const shown=(narrowed||showAll)?L:L.slice(0,15);
   $("#shopCount").textContent=`${L.length} of ${BOOKS.length} items`;
   const bits=[];
+  if(filt.group) bits.push(`${esc(GROUPS[filt.group].label)} <button data-clear="group">×</button>`);
   if(filt.cls) bits.push(`Class ${filt.cls} <button data-clear="cls">×</button>`);
   if(filt.q) bits.push(`“${esc(filt.q)}” <button data-clear="q">×</button>`);
+  if(filt.junior && filt.subj) bits.push(`${esc(filt.subj)}, classes 6–10`);
   if(narrowed) bits.push(`<button data-clear="all">Clear all</button>`);
   $("#activeF").innerHTML=bits.join(" ");
   $("#grid").innerHTML = L.length ? shown.map(card).join("") : `<div class="empty"><b>No match in our online list.</b><br>We stock many more titles. Message us the book name and class and we'll arrange it.<br><br><a class="btn small wa" target="_blank" rel="noopener" href="${waLink("Hi Jain Brothers, I'm looking for this book: ")}">Ask on WhatsApp</a></div>`;
   $("#moreRow").innerHTML = (!narrowed && L.length>15) ? `<button class="btn line" data-action="more">${showAll?"Show fewer":"Show all "+L.length+" items"}</button>` : "";
-  renderClasses();
+  renderClasses(); renderStreams();
 }
+function renderStreams(){
+  $("#streamGrid").innerHTML=["pcm","pcb","commerce","humanities"].map(k=>{ const g=GROUPS[k], n=BOOKS.filter(b=>inGroup(b,g)).length;
+    return `<button class="stream" style="background:${g.color}" data-board="" data-group="${k}" aria-pressed="${filt.group===k}"><span class="glyph" aria-hidden="true">${g.glyph}</span><span><b>${esc(g.label)}</b><small>${esc(g.blurb)}, plus English</small></span><span class="n">${n} books for Class 11 and 12</span></button>`; }).join("");
+}
+function renderMega(board){
+  const inBoard=BOOKS.filter(b=>b.board===board);
+  let html;
+  if(board==="Stationery"){
+    html=`<div class="lead"><b>Stationery</b><p>Everything for the school bag, at wholesale prices.</p><button class="btn small" data-board="Stationery">See all stationery</button></div>
+      <div><h5>Shop by category</h5><ul>${["notebooks","pens","art","calc"].map(k=>`<li><button data-board="Stationery" data-group="${k}">${esc(GROUPS[k].label)}<small>${inBoard.filter(b=>inGroup(b,GROUPS[k])).length}</small></button></li>`).join("")}</ul></div><div></div>`;
+  } else {
+    const junior=[...new Set(inBoard.filter(b=>b.cls<=10).map(b=>b.subj))].sort();
+    const streams=["pcm","pcb","commerce","humanities"].filter(k=>inBoard.some(b=>inGroup(b,GROUPS[k])));
+    html=`<div class="lead"><b>${esc(BOARD_LABEL[board])}</b><p>${board==="NCERT"?"Textbooks used in CBSE schools, latest editions.":board==="CBSE"?"Reference books, question banks and practice books.":"Textbooks for ICSE schools."}</p><button class="btn small" data-board="${board}">See all ${inBoard.length} books</button></div>
+      <div><h5>Classes 6 to 10, by subject</h5><ul>${junior.map(sj=>`<li><button data-board="${board}" data-subj="${esc(sj)}" data-junior="1">${esc(sj)}<small>${inBoard.filter(b=>b.cls<=10&&b.subj===sj).length}</small></button></li>`).join("")}</ul></div>
+      <div>${streams.length?`<h5>Classes 11 and 12, by stream</h5><ul>${streams.map(k=>`<li><button data-board="${board}" data-group="${k}">${esc(GROUPS[k].label)}<small>${inBoard.filter(b=>inGroup(b,GROUPS[k])).length}</small></button></li>`).join("")}</ul>`:""}</div>`;
+  }
+  $("#megaInner").innerHTML=html;
+}
+let openMenu="";
+function toggleMenu(board){
+  openMenu = openMenu===board ? "" : board;
+  document.querySelectorAll("[data-menu]").forEach(b=>b.setAttribute("aria-expanded",b.dataset.menu===openMenu));
+  if(openMenu){ renderMega(openMenu); $("#mega").hidden=false; } else $("#mega").hidden=true;
+}
+function closeMenu(){ if(openMenu) toggleMenu(openMenu); }
 function goShop(){ document.getElementById("shop").scrollIntoView(); }
 
 /* ================= Product detail ================= */
@@ -1067,7 +1222,7 @@ let paused=false; ["mouseenter","touchstart","focusin"].forEach(e=>slides.parent
 if(!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(()=>{ if(!paused&&!document.hidden&&!document.body.classList.contains("locked")) goSlide(slideIdx+1); },5500);
 
 /* ================= Events ================= */
-function setBoard(bd){ filt.board=bd; filt.cls=""; filt.subj=""; filt.q=""; $("#q").value=""; showAll=false; renderGrid(); goShop(); }
+function setBoard(bd, subj="", group="", junior=false){ Object.assign(filt,{board:bd,cls:"",subj:subj||"",group:group||"",junior:!!junior,q:""}); $("#q").value=""; showAll=false; closeMenu(); renderGrid(); goShop(); }
 document.addEventListener("click", e=>{
   const t=e.target.closest("button,a,[data-open]"); if(!t) return;
   const d=t.dataset;
@@ -1076,10 +1231,11 @@ document.addEventListener("click", e=>{
   if(d.add){ setQty(d.add,1); return toast(byId[d.add].title+" added to cart"); }
   if(d.inc) return setQty(d.inc,(cart[d.inc]||0)+1);
   if(d.dec) return setQty(d.dec,(cart[d.dec]||0)-1);
-  if(d.board!==undefined && !t.closest(".filters")){ e.preventDefault(); return setBoard(d.board); }
-  if(d.fboard!==undefined){ filt.board=d.fboard; filt.subj=""; if(d.fboard==="Stationery") filt.cls=""; showAll=false; return renderGrid(); }
-  if(d.cls){ filt.cls = String(filt.cls)===d.cls ? "" : d.cls; if(filt.board==="Stationery") filt.board=""; showAll=false; renderGrid(); return goShop(); }
-  if(d.clear){ if(d.clear==="cls") filt.cls=""; else if(d.clear==="q"){ filt.q=""; $("#q").value=""; } else { Object.assign(filt,{board:"",cls:"",subj:"",q:""}); $("#q").value=""; } return renderGrid(); }
+  if(d.menu) return toggleMenu(d.menu);
+  if(d.board!==undefined && !t.closest(".filters")){ e.preventDefault(); return setBoard(d.board, d.subj, d.group, d.junior); }
+  if(d.fboard!==undefined){ filt.board=d.fboard; filt.subj=""; filt.group=""; filt.junior=false; if(d.fboard==="Stationery") filt.cls=""; showAll=false; return renderGrid(); }
+  if(d.cls){ filt.cls = String(filt.cls)===d.cls ? "" : d.cls; filt.group=""; filt.junior=false; if(filt.board==="Stationery") filt.board=""; showAll=false; renderGrid(); return goShop(); }
+  if(d.clear){ if(d.clear==="cls") filt.cls=""; else if(d.clear==="group") filt.group=""; else if(d.clear==="q"){ filt.q=""; $("#q").value=""; } else { Object.assign(filt,{board:"",cls:"",subj:"",group:"",junior:false,q:""}); $("#q").value=""; } return renderGrid(); }
   if(d.slide) return goSlide(slideIdx+Number(d.slide));
   if(d.legal){ const [ti,h]=LEGAL[d.legal]; return openModal(ti,h); }
   if(d.faq!==undefined) return ask(FAQS[d.faq].q);
@@ -1092,7 +1248,7 @@ document.addEventListener("click", e=>{
     case "account": case "orders": return openOrders();
     case "logout": session=null; S.set("session",null); chat.classList.remove("open"); lock(); return toast("Logged out");
     case "more": showAll=!showAll; renderGrid(); if(!showAll) goShop(); return;
-    case "shop-all": Object.assign(filt,{board:"",cls:"",subj:"",q:""}); $("#q").value=""; showAll=true; renderGrid(); return goShop();
+    case "shop-all": Object.assign(filt,{board:"",cls:"",subj:"",group:"",junior:false,q:""}); $("#q").value=""; showAll=true; renderGrid(); return goShop();
     case "ex-add": exLines.push({t:"",cls:exLines[exLines.length-1].cls,cond:"good",mrp:""}); renderEx(); return $("#exLines").lastElementChild.querySelector("input").focus();
     case "ex-send": return sendEx();
     case "bulk": return openBulk();
@@ -1108,8 +1264,8 @@ document.addEventListener("input", e=>{
 document.addEventListener("change", e=>{
   const t=e.target;
   if(t.dataset.ex!==undefined){ exLines[t.dataset.ex][t.dataset.f]=t.value; return paintEx(); }
-  if(t.id==="fClass"){ filt.cls=t.value; if(filt.board==="Stationery"&&t.value) filt.board=""; return renderGrid(); }
-  if(t.id==="fSubject"){ filt.subj=t.value; return renderGrid(); }
+  if(t.id==="fClass"){ filt.cls=t.value; filt.junior=false; if(filt.board==="Stationery"&&t.value) filt.board=""; return renderGrid(); }
+  if(t.id==="fSubject"){ filt.subj=t.value; filt.group=""; return renderGrid(); }
   if(t.id==="fSort"){ filt.sort=t.value; return renderGrid(); }
   if(t.id==="qBoard"){ filt.board=t.value; filt.subj=""; return renderGrid(); }
 });
@@ -1119,14 +1275,19 @@ document.addEventListener("submit", e=>{
   if(f.id==="coForm") return submitCheckout();
   if(f.id==="bulkForm") return submitBulk();
   if(f.id==="chatForm"){ const v=$("#chatIn").value.trim(); if(v){ ask(v); $("#chatIn").value=""; } return; }
-  if(f.id==="searchForm"){ filt.q=$("#q").value; filt.board=$("#qBoard").value; filt.cls=""; filt.subj=""; renderGrid(); return goShop(); }
+  if(f.id==="searchForm"){ Object.assign(filt,{q:$("#q").value,board:$("#qBoard").value,cls:"",subj:"",group:"",junior:false}); renderGrid(); return goShop(); }
 });
-let qT; $("#q").addEventListener("input", e=>{ clearTimeout(qT); qT=setTimeout(()=>{ filt.q=e.target.value; filt.board=$("#qBoard").value; filt.cls=""; filt.subj=""; renderGrid(); },180); });
-document.addEventListener("keydown", e=>{ if(e.key==="Escape" && chat.classList.contains("open")) chat.classList.remove("open"); });
+let qT; $("#q").addEventListener("input", e=>{ clearTimeout(qT); qT=setTimeout(()=>{ Object.assign(filt,{q:e.target.value,board:$("#qBoard").value,cls:"",subj:"",group:"",junior:false}); renderGrid(); },180); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ if(chat.classList.contains("open")) chat.classList.remove("open"); closeMenu(); } });
+document.addEventListener("click", e=>{ if(openMenu && !e.target.closest("#mega,[data-menu]")) closeMenu(); });
 
 /* ================= Start ================= */
 $("#yr").textContent=new Date().getFullYear();
 $("#fAddr").textContent=BIZ.address;
+const mapUrl="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(BIZ.mapQuery);
+$("#fMap").href=mapUrl; $("#aboutMap").href=mapUrl; $("#aboutAddr").textContent=BIZ.address;
+$("#booklistBtn").href=waLink("Hi Jain Brothers, here's my school booklist. Name: \nAddress: \n(Photo attached)");
+fillPhotos();
 $("#fWa").href=waLink("Hi Jain Brothers, I have a question.");
 $("#waFloat").href=waLink("Hi Jain Brothers, I'd like to order books.");
 $("#faqList").innerHTML=FAQS.map(f=>`<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join("");
